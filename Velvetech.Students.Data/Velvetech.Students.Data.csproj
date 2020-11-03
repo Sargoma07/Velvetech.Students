@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
+        <PackageReference Include="Marques.EFCorev3.0.SnakeCase" Version="1.0.13" />
+
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.7" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.7">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Velvetech.Students.Domain\Velvetech.Students.Domain.csproj" />
+        <ProjectReference Include="..\Velvetech.Students.Infrastructure\Velvetech.Students.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>

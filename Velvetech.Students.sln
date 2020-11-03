@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Velvetech.Students.API", "Velvetech.Students.API\Velvetech.Students.API.csproj", "{8D058347-BC7E-4FDB-B835-25D08BDA0107}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Velvetech.Students.Domain", "Velvetech.Students.Domain\Velvetech.Students.Domain.csproj", "{C9F92BFB-3641-46BA-A486-BCF38DA2006C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Velvetech.Students.Data", "Velvetech.Students.Data\Velvetech.Students.Data.csproj", "{32289792-33CD-4759-A43F-56BB8F0338AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Velvetech.Students.Infrastructure", "Velvetech.Students.Infrastructure\Velvetech.Students.Infrastructure.csproj", "{B8EAE00C-2A60-4DEF-8BDD-16D3F4CD797C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8D058347-BC7E-4FDB-B835-25D08BDA0107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D058347-BC7E-4FDB-B835-25D08BDA0107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D058347-BC7E-4FDB-B835-25D08BDA0107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D058347-BC7E-4FDB-B835-25D08BDA0107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9F92BFB-3641-46BA-A486-BCF38DA2006C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9F92BFB-3641-46BA-A486-BCF38DA2006C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9F92BFB-3641-46BA-A486-BCF38DA2006C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9F92BFB-3641-46BA-A486-BCF38DA2006C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32289792-33CD-4759-A43F-56BB8F0338AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32289792-33CD-4759-A43F-56BB8F0338AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32289792-33CD-4759-A43F-56BB8F0338AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32289792-33CD-4759-A43F-56BB8F0338AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8EAE00C-2A60-4DEF-8BDD-16D3F4CD797C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8EAE00C-2A60-4DEF-8BDD-16D3F4CD797C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8EAE00C-2A60-4DEF-8BDD-16D3F4CD797C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8EAE00C-2A60-4DEF-8BDD-16D3F4CD797C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
