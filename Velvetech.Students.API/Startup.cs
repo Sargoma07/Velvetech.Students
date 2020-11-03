@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using Velvetech.Students.API.Auth;
 using Velvetech.Students.API.Models;
 using Velvetech.Students.Data;
 using Velvetech.Students.Data.Repositories;
@@ -50,6 +51,7 @@ namespace Velvetech.Students.API
                 .RegisterDbContext(_configuration)
                 .RegisterAutoMapper()
                 .RegisterRepositories()
+                .RegisterAuth(_configuration)
                 .AddControllers()
                 .AddJsonOptions(options => { options.JsonSerializerOptions.IgnoreNullValues = true; });
         }
@@ -68,7 +70,7 @@ namespace Velvetech.Students.API
             }
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
@@ -111,6 +113,32 @@ namespace Velvetech.Students.API
         }
 
         /// <summary>
+        /// Регистрировать аутентификацию 
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
+        public static IServiceCollection RegisterAuth(this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            // Используется Api keys аутентификация
+            // https://swagger.io/docs/specification/authentication/api-keys/
+            //
+            
+            // TODO: ключ для аутентификации dpT1DSiNuVhI5oN9T4Fg4PMocJmDbtY2hCJhu97gIygh19P5ND
+            
+            services.Configure<ApiKeyOptions>(configuration.GetSection("ApiKey"));
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = ApiKeyAuthenticationOptions.DefaultScheme;
+                    options.DefaultChallengeScheme = ApiKeyAuthenticationOptions.DefaultScheme;
+                })
+                .AddApiKey(options => { });
+
+            return services;
+        }
+
+        /// <summary>
         /// Регистрировать AutoMapper
         /// </summary>
         /// <param name="services">Коллекция сервисов</param>
@@ -148,14 +176,12 @@ namespace Velvetech.Students.API
                     Description = "Velvetech.Student API"
                 });
 
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                c.AddSecurityDefinition(ApiKeyAuthenticationOptions.DefaultScheme, new OpenApiSecurityScheme
                 {
-                    Name = "Authorization",
+                    Name = ApiKeyAuthenticationOptions.DefaultHeaderName,
                     Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer",
-                    BearerFormat = "JWT",
                     In = ParameterLocation.Header,
-                    Description = "Введите в поле Bearer с JWT токеном как показано выше (без скобок)"
+                    Description = "Enter your Api Key below:"
                 });
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
@@ -165,7 +191,7 @@ namespace Velvetech.Students.API
                             Reference = new OpenApiReference
                             {
                                 Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
+                                Id = "ApiKey",
                             }
                         },
                         new string[] { }

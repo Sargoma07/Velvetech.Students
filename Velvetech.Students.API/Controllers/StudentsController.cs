@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Velvetech.Students.API.Models;
@@ -10,6 +11,7 @@ using Velvetech.Students.Infrastructure.Pagination;
 namespace Velvetech.Students.API.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("students")]
     public class StudentsController : ControllerBase
     {
