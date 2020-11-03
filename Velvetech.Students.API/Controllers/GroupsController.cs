@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Velvetech.Students.API.Models;
@@ -11,6 +12,7 @@ using Velvetech.Students.Domain.Repositories;
 namespace Velvetech.Students.API.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("groups")]
     public class GroupsController : ControllerBase
     {

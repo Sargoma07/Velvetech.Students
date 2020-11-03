@@ -23,32 +23,32 @@ namespace Velvetech.Students.Domain.Entities
         /// <summary>
         /// Id
         /// </summary>
-        public long Id { get; set; }
+        public long Id { get; private set; }
 
         /// <summary>
         /// Пол
         /// </summary>
-        public Gender Gender { get; set; }
+        public Gender Gender { get; private set; }
 
         /// <summary>
         /// Имя
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
         /// <summary>
         /// Фамилия
         /// </summary>
-        public string Surname { get; set; }
+        public string Surname { get; private set; }
 
         /// <summary>
         /// Отчество
         /// </summary>
-        public string Patronymic { get; set; }
+        public string Patronymic { get; private set; }
 
         /// <summary>
         /// Уникальный идентификатор студента 
         /// </summary>
-        public string UIS { get; set; }
+        public string UIS { get; private set; }
 
         /// <summary>
         /// Связующая сущность для отношения  многие ко многим с группами
@@ -103,12 +103,12 @@ namespace Velvetech.Students.Domain.Entities
         /// Валидация уникальный идентификатор студента
         /// </summary>
         /// <param name="uis">Уникальный идентификатор</param>
-        /// <exception cref="StudentCreateException">Ошибка создания студента</exception>
+        /// <exception cref="StudentException">Ошибка создания студента</exception>
         private static void ValidateUIS([CanBeNull] string uis)
         {
             if (uis != null && uis.Length < _minLenghtUIS)
             {
-                throw new StudentCreateException(
+                throw new StudentException(
                     $"Уникальный идентификатор студента должен содержать не менее {_minLenghtUIS} символов");
             }
         }

@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using Velvetech.Students.Domain.Entities;
+using Velvetech.Students.Domain.Exceptions;
 using Velvetech.Students.Domain.Repositories;
 using Velvetech.Students.Infrastructure.Pagination;
 
@@ -20,6 +23,32 @@ namespace Velvetech.Students.Data.Repositories
         public StudentRepository(StudentDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        /// <inheritdoc />
+        public override async Task Add(Student item)
+        {
+            try
+            {
+                await base.Add(item);
+            }
+            catch (DbUpdateException e) when(((PostgresException) e.InnerException)?.SqlState == "23505") // Duplicate key
+            {
+                CheckDuplicateUIS(e);
+            }
+        }
+
+        /// <inheritdoc />
+        public override async Task Update(Student item)
+        {
+            try
+            {
+                await base.Update(item);
+            }
+            catch (DbUpdateException e) when(((PostgresException) e.InnerException)?.SqlState == "23505") // Duplicate key
+            {
+                CheckDuplicateUIS(e);
+            }
         }
 
         /// <inheritdoc />
@@ -87,6 +116,23 @@ namespace Velvetech.Students.Data.Repositories
             var result = await base.GetAll(paginationQuery, filter);
             await IncludeGroups(result.Items);
             return result;
+        }
+
+        /// <summary>
+        /// Проверка на дубликат UIS
+        /// </summary>
+        /// <param name="e">Исключение</param>
+        /// <exception cref="StudentException">Ошибка при работе с сущностью Student</exception>
+        /// <exception cref="Exception">Другие Exception</exception>
+        private static void CheckDuplicateUIS([NotNull] Exception e)
+        {
+            var exception = e.InnerException as PostgresException;
+            if (exception?.ConstraintName != null && exception.ConstraintName.ToLower().Contains("uis"))
+            {
+                throw new StudentException($"Студент с таким {nameof(Student.UIS)} уже существует.");
+            }
+
+            throw e;
         }
 
         /// <summary>
