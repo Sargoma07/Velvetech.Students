@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Velvetech.Students.API.Models;
+using Velvetech.Students.Domain.Exceptions;
 using Velvetech.Students.Domain.Model;
 using Velvetech.Students.Domain.Repositories;
 using Velvetech.Students.Infrastructure.Pagination;
@@ -63,13 +65,24 @@ namespace Velvetech.Students.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> Create([FromBody] StudentDto item)
         {
-            var student = Domain.Entities.Student.Create(item);
-            await _repository.Add(student);
+            try
+            {
+                var student = Domain.Entities.Student.Create(item);
+                await _repository.Add(student);
 
-            return CreatedAtAction(
-                nameof(GetById),
-                new {id = student.Id},
-                new {id = student.Id});
+                return CreatedAtAction(
+                    nameof(GetById),
+                    new {id = student.Id},
+                    new {id = student.Id});
+            }
+            catch (StudentException e)
+            {
+                return Problem(
+                    title: "Ошибка при добавлении студента.",
+                    detail: $"Ошибка при добавлении студента. {e.Message}",
+                    statusCode: StatusCodes.Status400BadRequest
+                );
+            }
         }
 
         [HttpPut("{id}")]
@@ -88,10 +101,21 @@ namespace Velvetech.Students.API.Controllers
 
             var student = await _repository.Find(id);
 
-            student.Update(item);
-            await _repository.Update(student);
+            try
+            {
+                student.Update(item);
+                await _repository.Update(student);
 
-            return NoContent();
+                return NoContent();
+            }
+            catch (StudentException e)
+            {
+                return Problem(
+                    title: "Ошибка при добавлении студента.",
+                    detail: $"Ошибка при добавлении студента. {e.Message}",
+                    statusCode: StatusCodes.Status400BadRequest
+                );
+            }
         }
 
         [HttpDelete("{id}")]
