@@ -9,6 +9,12 @@ namespace Velvetech.Students.Domain.Entities
     /// </summary>
     public class Group
     {
+        public Group(long id, string name):this()
+        {
+            Id = id;
+            Name = name;
+        }
+
         protected Group()
         {
         }
@@ -16,12 +22,12 @@ namespace Velvetech.Students.Domain.Entities
         /// <summary>
         /// Id
         /// </summary>
-        public long Id { get; private set; }
+        public long Id { get; protected set; }
 
         /// <summary>
         /// Название
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; protected set; }
 
         /// <summary>
         /// Связующая сущность для отношения  многие ко многим со студентами

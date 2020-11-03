@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Velvetech.Students.Data", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Velvetech.Students.Infrastructure", "Velvetech.Students.Infrastructure\Velvetech.Students.Infrastructure.csproj", "{B8EAE00C-2A60-4DEF-8BDD-16D3F4CD797C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Velvetech.Students.API.Tests", "Velvetech.Students.API.Tests\Velvetech.Students.API.Tests.csproj", "{61603576-24A0-48B9-B1E7-5783A775F570}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{B8EAE00C-2A60-4DEF-8BDD-16D3F4CD797C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8EAE00C-2A60-4DEF-8BDD-16D3F4CD797C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8EAE00C-2A60-4DEF-8BDD-16D3F4CD797C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61603576-24A0-48B9-B1E7-5783A775F570}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61603576-24A0-48B9-B1E7-5783A775F570}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61603576-24A0-48B9-B1E7-5783A775F570}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61603576-24A0-48B9-B1E7-5783A775F570}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
